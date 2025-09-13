@@ -12,7 +12,7 @@ function FetchPokemon() {
     async function fetchPokemonData() {
       const response = await fetch(currentUrl);
       const data = await response.json();
-//Atualiza os valores "dinamicamente" atravez dos botoes NEXT e PREV
+//O set sera usado nos botoes NEXT e PREV para Atualiza os valores "dinamicamente"
       setPokemons(data.results);
       setNextUrl(data.next);
       setPrevUrl(data.previous);
@@ -30,13 +30,13 @@ function FetchPokemon() {
 
       <div className="grid grid-cols-4 gap-6 ">
         {pokemons.map((poke, index) => {
-
+          
+          const id = poke.url.split("/").filter(Boolean).pop();
           // o ID pega dinamicamente o numero da url da API:
           // EXEMPLO:
           // name: "bulbasaur",
-          // url: "https://pokeapi.co/api/v2/pokemon/1/"
+          // url: "https://pokeapi.co/api/v2/pokemon/1/" <---- este ultimo numero
 
-          const id = poke.url.split("/").filter(Boolean).pop();
           return (
             <div
               key={poke.name}
